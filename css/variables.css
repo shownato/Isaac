@@ -1,0 +1,51 @@
+:root {
+  /* Cores Principais */
+  --sky: #F4F9FE;
+  --powder: #E4F0FB;
+  --powder-2: #D6E8F8;
+  --blue: #3B6BB5;
+  --blue-soft: #5A85C6;
+  --blue-light: #7FA3D9;
+  --ink: #274372;
+  --ink-light: #3D5A7F;
+  --muted: #6E82A5;
+  --muted-light: #95A5C6;
+  --white: #FFFFFF;
+  --cream: #FAF8F5;
+  --cream-warm: #F5EFE8;
+  --line: #D8E7F6;
+  --line-light: #E8F0FA;
+  
+  /* Cores de Destaque */
+  --accent-primary: #E8927C;
+  --accent-secondary: #F5C6A5;
+  --accent-tertiary: #A8D5E5;
+ .grid-background: rgba(250, 248, 245, 0.5);
+
+  /* Tipografia */
+  --font-display: 'Playfair Display', serif;
+  --font-script: 'Dancing Script', cursive;
+  --font-body: 'Inter', system-ui, sans-serif;
+  
+  /* Espaçamento */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 3rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8rem;
+
+  /* Animações */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease;
+  --transition-smooth: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Sombra */
+  --shadow-sm: 0 2px 8px rgba(39, 67, 114, 0.08);
+  --shadow-md: 0 8px 24px rgba(39, 67, 114, 0.12);
+  --shadow-lg: 0 16px 40px rgba(39, 67, 114, 0.15);
+  --shadow-xl: 0 24px 60px rgba(39, 67, 114, 0.18);
+  --shadow-card: 0 4px 20px rgba(39, 67, 114, 0.1);
+}
