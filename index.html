@@ -103,8 +103,23 @@ section{position:relative}
 .gal-head{margin-bottom:2.6rem;text-align:center}
 .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .gal-grid figure{border-radius:22px;overflow:hidden;box-shadow:0 26px 54px -40px rgba(39,67,114,.5)}
-.gal-grid img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5;object-position:center top;transition:transform .8s ease}
+.gal-grid img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5;object-position:center top;transition:transform .8s ease;cursor:zoom-in}
 .gal-grid figure:hover img{transform:scale(1.04)}
+
+/* LIGHTBOX (clicar para ampliar) */
+.lightbox{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+  background:rgba(23,40,72,.86);backdrop-filter:blur(4px);padding:clamp(1rem,4vw,3rem);
+  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;cursor:zoom-out}
+.lightbox.open{opacity:1;visibility:visible}
+.lightbox img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.6);transform:scale(.96);transition:transform .3s ease}
+.lightbox.open img{transform:scale(1)}
+.lightbox .lb-close{position:absolute;top:clamp(1rem,3vw,1.8rem);right:clamp(1rem,3vw,1.8rem);
+  width:44px;height:44px;border:none;border-radius:999px;background:rgba(255,255,255,.15);color:#fff;
+  font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .25s ease}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.3)}
+@media (prefers-reduced-motion:reduce){.lightbox,.lightbox img{transition:none}}
 
 /* MOMENTS (softened "offerings") */
 .moments{background:linear-gradient(170deg,#E9F2FB,#DBEBF8);padding:clamp(4.5rem,10vw,7rem) 0}
@@ -279,12 +294,26 @@ footer .fname{font-family:'Fraunces';color:var(--ink);font-size:1.05rem;font-wei
   <div style="margin-top:.4rem">Modelo infantil · @isaacroberto02</div>
 </footer>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button class="lb-close" type="button" aria-label="Fechar">&times;</button>
+  <img src="" alt="">
+</div>
+
 <script>
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
 document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
 const reach=document.querySelector('.reach');
 const bIO=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%');bIO.disconnect();}});},{threshold:.3});
 if(reach)bIO.observe(reach);
+
+// Lightbox: clicar em uma foto da galeria para ampliar
+const lb=document.getElementById('lightbox');
+const lbImg=lb.querySelector('img');
+function openLb(src,alt){lbImg.src=src;lbImg.alt=alt||'';lb.classList.add('open');document.body.style.overflow='hidden';}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';lbImg.src='';}
+document.querySelectorAll('.gal-grid img').forEach(img=>{img.addEventListener('click',()=>openLb(img.currentSrc||img.src,img.alt));});
+lb.addEventListener('click',closeLb);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
 </script>
 </body>
 </html>
