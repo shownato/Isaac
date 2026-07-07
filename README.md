@@ -36,16 +36,17 @@ Pronto — o site está no ar!
 
 ## Passo 4 — Ativar o preview de compartilhamento (importante)
 
-Abra o `index.html` e troque, nas linhas do topo, todo `https://SEU-DOMINIO.com.br`
-pelo endereço real do seu site (o que apareceu no Passo 3). São algumas linhas
-marcadas com o comentário "Preview de compartilhamento".
+O `index.html` já vem configurado para `https://shownato.github.io/Isaac/`
+(são as linhas marcadas com o comentário "Preview de compartilhamento").
+
+Se você publicar este site em outro endereço (outro usuário ou nome de
+repositório), abra o `index.html` e troque todas as ocorrências de
+`https://shownato.github.io/Isaac/` nessas linhas pelo endereço real do seu site.
 
 Exemplo: se o seu endereço for `https://mariasilva.github.io/isaac-roberto/`, então:
 
     <meta property="og:url" content="https://mariasilva.github.io/isaac-roberto/">
     <meta property="og:image" content="https://mariasilva.github.io/isaac-roberto/og-isaac.jpg">
-
-(faça o mesmo nas outras linhas que tiverem `SEU-DOMINIO`).
 
 Depois é só salvar/enviar de novo. Para forçar o WhatsApp/Facebook a mostrarem
 a imagem nova, cole o link em https://developers.facebook.com/tools/debug/ e
