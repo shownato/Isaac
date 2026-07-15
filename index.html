@@ -39,9 +39,12 @@
   --powder:#E4F0FB;
   --powder-2:#D6E8F8;
   --blue:#3B6BB5;
-  --blue-soft:#5A85C6;
+  /* blue-soft e muted foram escurecidos para passar no fundo mais
+     escuro em que pousam (o fim do degrade do contato, #D2E5F7).
+     Antes: blue-soft 2.91 e muted 3.78 ali — reprovavam. */
+  --blue-soft:#5076B0;
   --ink:#274372;
-  --muted:#5F719A;
+  --muted:#556589;
   --white:#FFFFFF;
   --line:#D8E7F6;
 
@@ -89,7 +92,13 @@ section{position:relative}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+  /* As barras, o zoom da galeria e os botoes ficavam de fora da regra. */
+  .bar .fill,.gal-grid img,.btn,.ccard{transition:none}
+  .btn:hover,.ccard:hover,.gal-grid figure:hover img{transform:none}
+}
 
 /* HERO */
 .hero{display:grid;grid-template-columns:1.02fr .98fr;min-height:96vh;align-items:stretch;
@@ -128,14 +137,23 @@ section{position:relative}
 .gal-head{margin-bottom:2.6rem;text-align:center}
 .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .gal-grid figure{border-radius:22px;overflow:hidden;box-shadow:0 26px 54px -40px rgba(39,67,114,.5)}
-.gal-grid img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5;object-position:center top;transition:transform .8s ease;cursor:zoom-in}
+/* A foto e um <button>: so assim o teclado alcanca e aciona o lightbox.
+   O botao nao tem aparencia propria — a foto e toda a superficie. */
+.gal-btn{display:block;width:100%;padding:0;border:none;background:none;cursor:zoom-in;font:inherit;color:inherit}
+.gal-grid img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/5;object-position:center top;transition:transform .8s ease}
 .gal-grid figure:hover img{transform:scale(1.04)}
+/* O figure tem overflow:hidden, entao um contorno para fora seria cortado. */
+.gal-btn:focus-visible{outline:3px solid var(--blue);outline-offset:-3px;border-radius:0}
 
 /* LIGHTBOX (clicar para ampliar) */
 .lightbox{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
   background:rgba(23,40,72,.86);backdrop-filter:blur(4px);padding:clamp(1rem,4vw,3rem);
-  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;cursor:zoom-out}
-.lightbox.open{opacity:1;visibility:visible}
+  opacity:0;visibility:hidden;cursor:zoom-out;
+  /* Ao FECHAR, a visibility espera o fade terminar (delay .3s). Ao ABRIR ela
+     vira visible na hora (0s), senao o foco entraria num elemento ainda
+     invisivel e o focus() nao teria efeito. */
+  transition:opacity .3s ease,visibility 0s linear .3s}
+.lightbox.open{opacity:1;visibility:visible;transition:opacity .3s ease,visibility 0s linear 0s}
 .lightbox img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain;
   box-shadow:0 40px 80px -30px rgba(0,0,0,.6);transform:scale(.96);transition:transform .3s ease}
 .lightbox.open img{transform:scale(1)}
@@ -242,12 +260,12 @@ footer .fname{font-family:'Fraunces',serif;color:var(--ink);font-size:var(--fs-m
       <h2 class="titlestack" style="margin-top:.5rem"><span class="big">Alguns cliques</span> <span class="cursive">favoritos</span></h2>
     </div>
     <div class="gal-grid reveal">
-      <figure><img src="img/isaac-pascoa.jpg" alt="Isaac Roberto rindo, em polo preto e shorts branco, em cenário de Páscoa" loading="lazy" decoding="async"></figure>
-      <figure><img src="img/isaac-vermelho.jpg" alt="Isaac Roberto agachado, de camiseta branca e shorts vermelho" loading="lazy" decoding="async"></figure>
-      <figure><img src="img/isaac-jurassic.jpg" alt="Isaac Roberto em look de explorador, com colete bege e cenário de floresta" loading="lazy" decoding="async"></figure>
-      <figure><img src="img/isaac-prada.jpg" alt="Isaac Roberto de óculos escuros e camisa jeans, ao ar livre" loading="lazy" decoding="async"></figure>
-      <figure><img src="img/isaac-3.jpg" alt="Isaac Roberto sorrindo e apontando, em camisa floral" loading="lazy" decoding="async"></figure>
-      <figure><img src="img/isaac-skate.jpg" alt="Isaac Roberto de camiseta amarela, apoiado em um skate" loading="lazy" decoding="async"></figure>
+      <figure><button type="button" class="gal-btn"><img src="img/isaac-pascoa.jpg" alt="Isaac Roberto rindo, em polo preto e shorts branco, em cenário de Páscoa" loading="lazy" decoding="async"></button></figure>
+      <figure><button type="button" class="gal-btn"><img src="img/isaac-vermelho.jpg" alt="Isaac Roberto agachado, de camiseta branca e shorts vermelho" loading="lazy" decoding="async"></button></figure>
+      <figure><button type="button" class="gal-btn"><img src="img/isaac-jurassic.jpg" alt="Isaac Roberto em look de explorador, com colete bege e cenário de floresta" loading="lazy" decoding="async"></button></figure>
+      <figure><button type="button" class="gal-btn"><img src="img/isaac-prada.jpg" alt="Isaac Roberto de óculos escuros e camisa jeans, ao ar livre" loading="lazy" decoding="async"></button></figure>
+      <figure><button type="button" class="gal-btn"><img src="img/isaac-3.jpg" alt="Isaac Roberto sorrindo e apontando, em camisa floral" loading="lazy" decoding="async"></button></figure>
+      <figure><button type="button" class="gal-btn"><img src="img/isaac-skate.jpg" alt="Isaac Roberto de camiseta amarela, apoiado em um skate" loading="lazy" decoding="async"></button></figure>
     </div>
   </div>
 </section>
@@ -336,14 +354,42 @@ const reach=document.querySelector('.reach');
 const bIO=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%');bIO.disconnect();}});},{threshold:.3});
 if(reach)bIO.observe(reach);
 
-// Lightbox: clicar em uma foto da galeria para ampliar
+// Lightbox: clicar (ou dar Enter/Espaco) numa foto da galeria para ampliar
 const lb=document.getElementById('lightbox');
 const lbImg=lb.querySelector('img');
-function openLb(src,alt){lbImg.src=src;lbImg.alt=alt||'';lb.classList.add('open');document.body.style.overflow='hidden';}
-function closeLb(){lb.classList.remove('open');document.body.style.overflow='';lbImg.src='';}
-document.querySelectorAll('.gal-grid img').forEach(img=>{img.addEventListener('click',()=>openLb(img.currentSrc||img.src,img.alt));});
-lb.addEventListener('click',closeLb);
+const lbClose=lb.querySelector('.lb-close');
+let focoAnterior=null;
+
+function openLb(src,alt,origem){
+  focoAnterior=origem||document.activeElement;
+  lbImg.src=src;lbImg.alt=alt||'';
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+  // O lightbox e visibility:hidden ate a classe .open entrar. Sem forcar o
+  // recalculo aqui, o focus() abaixo roda enquanto ele ainda esta invisivel
+  // e nao tem efeito — o foco ficava preso na foto de origem.
+  void lb.offsetWidth;
+  lbClose.focus(); // o dialogo se declara aria-modal: o foco precisa entrar nele
+}
+function closeLb(){
+  lb.classList.remove('open');
+  document.body.style.overflow='';
+  lbImg.src='';lbImg.alt='';
+  if(focoAnterior){focoAnterior.focus();focoAnterior=null;} // devolve o foco a foto de origem
+}
+
+document.querySelectorAll('.gal-btn').forEach(btn=>{
+  const img=btn.querySelector('img');
+  btn.addEventListener('click',()=>openLb(img.currentSrc||img.src,img.alt,btn));
+});
+
+lbClose.addEventListener('click',closeLb);
+// So o fundo fecha. Antes o clique subia da foto ampliada e fechava o
+// lightbox — justo o gesto de quem quer olhar a foto de perto.
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
+// Prende o Tab dentro do dialogo: o unico foco possivel e o botao fechar.
+lb.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();lbClose.focus();}});
 </script>
 </body>
 </html>
