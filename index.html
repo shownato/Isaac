@@ -44,6 +44,27 @@
   --muted:#5F719A;
   --white:#FFFFFF;
   --line:#D8E7F6;
+
+  /* Escala tipografica. Antes eram 22 tamanhos distintos, varios
+     separados por menos de 1px — diferenca que ninguem le como
+     hierarquia. Todo font-size do site sai daqui. */
+  --fs-2xs:.6875rem;   /* 11px — eyebrow, rotulo de numero */
+  --fs-xs:.875rem;     /* 14px — chip, rodape, responsavel, barras */
+  --fs-sm:.9375rem;    /* 15px — botao, texto dos cards */
+  --fs-base:1rem;      /* 16px — corpo */
+  --fs-md:1.125rem;    /* 18px — titulo de card, tagline, nome no rodape */
+  --fs-lg:1.3125rem;   /* 21px — lead do Sobre */
+  --fs-xl:1.5rem;      /* 24px — saudacao do hero */
+  --fs-script:clamp(1.7rem,4vw,2.5rem);    /* cursivas */
+  --fs-display:clamp(2.2rem,5.2vw,3.4rem); /* titulos de secao e numeros */
+  --fs-hero:clamp(2.8rem,8vw,5.2rem);      /* o nome */
+
+  /* Entrelinha: aperta conforme a letra cresce. O body e 1.75 e era
+     herdado ate por titulo de 54px, que ficava com caixa de 95px. */
+  --lh-body:1.75;
+  --lh-snug:1.3;   /* titulos pequenos */
+  --lh-tight:1.05; /* display */
+  --lh-flush:1;    /* titulos empilhados e numeros */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -51,19 +72,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 body{
   font-family:'Mulish',system-ui,sans-serif;
   color:var(--ink);background:var(--sky);
-  line-height:1.75;font-weight:400;
+  line-height:var(--lh-body);font-weight:400;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 .wrap{max-width:1080px;margin:0 auto;padding:0 30px;}
-.eyebrow{display:block;font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:.7rem;color:var(--blue)}
+.eyebrow{display:block;font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:var(--fs-2xs);color:var(--blue)}
 section{position:relative}
 
 /* serif + script title device — lighter */
 .titlestack{position:relative;display:inline-block;line-height:1}
 .titlestack .big{font-family:'Fraunces',serif;font-weight:300;color:var(--ink);
-  font-size:clamp(2.2rem,5.2vw,3.4rem);letter-spacing:.005em;display:block}
+  font-size:var(--fs-display);line-height:var(--lh-flush);letter-spacing:.005em;display:block}
 .titlestack .cursive{font-family:'Dancing Script',cursive;font-weight:500;color:var(--blue-soft);
-  font-size:clamp(1.7rem,4vw,2.5rem);display:block;text-align:right;margin-top:-.12em;line-height:1;
+  font-size:var(--fs-script);display:block;text-align:right;margin-top:-.12em;line-height:1;
   transform:rotate(-3deg);white-space:nowrap;pointer-events:none}
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease}
@@ -74,16 +95,16 @@ section{position:relative}
 .hero{display:grid;grid-template-columns:1.02fr .98fr;min-height:96vh;align-items:stretch;
   background:linear-gradient(150deg,#F4F9FE 0%, #E7F1FB 60%, #DCEAF8 100%)}
 .hero-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,6vw,5.5rem)}
-.hero .hi{font-family:'Dancing Script';font-size:1.5rem;color:var(--blue-soft);margin-bottom:.5rem;font-weight:500}
-.hero .name{font-family:'Fraunces',serif;line-height:.98;letter-spacing:.01em}
-.hero .name .l1{display:block;font-weight:300;font-size:clamp(2.8rem,8vw,5.2rem);color:var(--blue)}
-.hero .name .l2{display:block;font-weight:400;font-size:clamp(2.8rem,8vw,5.2rem);color:var(--ink)}
-.hero .role-cursive{font-family:'Dancing Script';font-weight:500;color:var(--blue-soft);
-  font-size:clamp(1.6rem,3.6vw,2.3rem);margin:.4rem 0 1.4rem;display:block;transform:rotate(-2deg)}
-.hero .tag{font-family:'Fraunces';font-weight:300;color:var(--muted);font-size:1.12rem;max-width:30ch;margin-bottom:2rem}
+.hero .hi{font-family:'Dancing Script',cursive;font-size:var(--fs-xl);line-height:var(--lh-snug);color:var(--blue-soft);margin-bottom:.5rem;font-weight:500}
+.hero .name{font-family:'Fraunces',serif;font-size:var(--fs-hero);line-height:.98;letter-spacing:.01em}
+.hero .name .l1{display:block;font-weight:300;font-size:var(--fs-hero);color:var(--blue)}
+.hero .name .l2{display:block;font-weight:400;font-size:var(--fs-hero);color:var(--ink)}
+.hero .role-cursive{font-family:'Dancing Script',cursive;font-weight:500;color:var(--blue-soft);
+  font-size:var(--fs-script);line-height:var(--lh-flush);margin:.4rem 0 1.4rem;display:block;transform:rotate(-2deg)}
+.hero .tag{font-family:'Fraunces',serif;font-weight:300;color:var(--muted);font-size:var(--fs-md);max-width:30ch;margin-bottom:2rem}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.9rem}
 .btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.8rem 1.7rem;
-  font-weight:500;font-size:.94rem;text-decoration:none;transition:transform .3s ease,background .3s ease,color .3s ease}
+  font-weight:500;font-size:var(--fs-sm);text-decoration:none;transition:transform .3s ease,background .3s ease,color .3s ease}
 .btn-primary{background:var(--blue);color:#fff}
 .btn-primary:hover{transform:translateY(-2px);background:var(--ink)}
 .btn-ghost{border:1.5px solid var(--line);color:var(--blue)}
@@ -97,10 +118,10 @@ section{position:relative}
 .about-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(2.4rem,6vw,5rem);align-items:center}
 .about-photo img{width:100%;border-radius:26px;display:block;aspect-ratio:3/4;object-fit:cover;object-position:center top;
   box-shadow:0 30px 60px -40px rgba(39,67,114,.4)}
-.about-body .lead{font-family:'Fraunces';font-weight:300;font-size:1.32rem;color:var(--ink);line-height:1.55;margin:1rem 0}
-.about-body p{color:var(--muted);font-size:1.04rem;margin-top:1rem;max-width:54ch;font-weight:400}
+.about-body .lead{font-family:'Fraunces',serif;font-weight:300;font-size:var(--fs-lg);color:var(--ink);line-height:1.55;margin:1rem 0}
+.about-body p{color:var(--muted);font-size:var(--fs-base);margin-top:1rem;max-width:54ch;font-weight:400}
 .chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.8rem}
-.chip{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:.45rem 1.1rem;font-weight:500;font-size:.84rem;color:var(--blue)}
+.chip{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:.45rem 1.1rem;font-weight:500;font-size:var(--fs-xs);color:var(--blue)}
 
 /* GALLERY */
 .gallery{padding:0 0 clamp(4.5rem,10vw,7.5rem)}
@@ -120,7 +141,8 @@ section{position:relative}
 .lightbox.open img{transform:scale(1)}
 .lightbox .lb-close{position:absolute;top:clamp(1rem,3vw,1.8rem);right:clamp(1rem,3vw,1.8rem);
   width:44px;height:44px;border:none;border-radius:999px;background:rgba(255,255,255,.15);color:#fff;
-  font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:inherit; /* botao nao herda fonte sozinho: o x caia em Arial */
+  font-size:var(--fs-xl);line-height:var(--lh-flush);cursor:pointer;display:flex;align-items:center;justify-content:center;
   transition:background .25s ease}
 .lightbox .lb-close:hover{background:rgba(255,255,255,.3)}
 @media (prefers-reduced-motion:reduce){.lightbox,.lightbox img{transition:none}}
@@ -132,40 +154,40 @@ section{position:relative}
 .mcard{text-align:center;padding:1.4rem}
 .mcard .ic{width:52px;height:52px;border-radius:50%;background:var(--white);display:grid;place-items:center;margin:0 auto 1rem}
 .mcard .ic svg{width:24px;height:24px;stroke:var(--blue-soft);fill:none;stroke-width:1.6}
-.mcard h3{font-family:'Fraunces';font-weight:400;font-size:1.18rem;margin-bottom:.35rem;color:var(--ink)}
-.mcard p{color:var(--muted);font-size:.96rem;max-width:30ch;margin:0 auto}
+.mcard h3{font-family:'Fraunces',serif;font-weight:400;font-size:var(--fs-md);line-height:var(--lh-snug);margin-bottom:.35rem;color:var(--ink)}
+.mcard p{color:var(--muted);font-size:var(--fs-sm);max-width:30ch;margin:0 auto}
 
 /* REACH — quiet */
 .reach{padding:clamp(4.5rem,10vw,7rem) 0}
 .reach .head{text-align:center;margin-bottom:2.8rem}
 .reach .head p{color:var(--muted);margin-top:1rem;max-width:46ch;margin-left:auto;margin-right:auto}
 .big3{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:720px;margin:0 auto 3rem;text-align:center}
-.stat .num{font-family:'Fraunces';font-weight:300;font-size:clamp(2.2rem,5vw,3.1rem);color:var(--blue);line-height:1}
-.stat .lbl{font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:.68rem;color:var(--muted);margin-top:.6rem}
+.stat .num{font-family:'Fraunces',serif;font-weight:300;font-size:var(--fs-display);color:var(--blue);line-height:var(--lh-flush)}
+.stat .lbl{font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:var(--fs-2xs);color:var(--muted);margin-top:.6rem}
 .stat .divider{display:none}
 .cards2{display:grid;grid-template-columns:1fr;gap:1.4rem;max-width:480px;margin:0 auto}
 .card{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:1.8rem 1.9rem}
-.card h3{font-family:'Fraunces';font-weight:400;font-size:1.1rem;color:var(--ink);margin-bottom:1.3rem}
+.card h3{font-family:'Fraunces',serif;font-weight:400;font-size:var(--fs-md);line-height:var(--lh-snug);color:var(--ink);margin-bottom:1.3rem}
 .bar{margin-bottom:.95rem}.bar:last-child{margin-bottom:0}
-.bar .row{display:flex;justify-content:space-between;font-size:.88rem;font-weight:500;margin-bottom:.3rem;color:var(--ink)}
+.bar .row{display:flex;justify-content:space-between;font-size:var(--fs-xs);font-weight:500;margin-bottom:.3rem;color:var(--ink)}
 .bar .track{height:7px;background:#EEF4FB;border-radius:999px;overflow:hidden}
 .bar .fill{height:100%;border-radius:999px;background:var(--blue-soft);width:0;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
 
 /* CONTACT — gentle */
 .contact{padding:clamp(5rem,11vw,8rem) 0;background:linear-gradient(160deg,#E4F0FB,#D2E5F7);text-align:center}
-.contact .script{font-family:'Dancing Script';font-weight:500;color:var(--blue-soft);font-size:clamp(1.8rem,4.5vw,2.6rem);display:block;transform:rotate(-2deg)}
-.contact h2{font-family:'Fraunces';font-weight:300;font-size:clamp(2.2rem,6vw,3.4rem);color:var(--ink);margin:.3rem 0 .8rem;letter-spacing:.01em}
-.contact .sub{color:var(--muted);max-width:42ch;margin:0 auto 2.2rem;font-size:1.05rem}
+.contact .script{font-family:'Dancing Script',cursive;font-weight:500;color:var(--blue-soft);font-size:var(--fs-script);line-height:var(--lh-flush);display:block;transform:rotate(-2deg)}
+.contact h2{font-family:'Fraunces',serif;font-weight:300;font-size:var(--fs-display);line-height:var(--lh-tight);color:var(--ink);margin:.3rem 0 .8rem;letter-spacing:.01em}
+.contact .sub{color:var(--muted);max-width:42ch;margin:0 auto 2.2rem;font-size:var(--fs-base)}
 .contact-cards{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1.6rem}
 .ccard{display:inline-flex;align-items:center;gap:.65rem;background:var(--white);border:1px solid var(--line);
   border-radius:999px;padding:.85rem 1.6rem;color:var(--blue);text-decoration:none;font-weight:500;transition:transform .3s ease,box-shadow .3s ease}
 .ccard:hover{transform:translateY(-2px);box-shadow:0 16px 30px -20px rgba(39,67,114,.5)}
 .ccard svg{width:19px;height:19px;stroke:var(--blue);fill:none;stroke-width:1.7}
-.guardian{display:inline-block;margin-top:.5rem;color:var(--muted);font-size:.9rem;max-width:50ch;line-height:1.6}
+.guardian{display:inline-block;margin-top:.5rem;color:var(--muted);font-size:var(--fs-xs);max-width:50ch;line-height:1.6}
 .guardian strong{color:var(--ink);font-weight:600}
 
-footer{background:var(--sky);color:var(--muted);text-align:center;padding:2.4rem 1rem;font-size:.85rem;border-top:1px solid var(--line)}
-footer .fname{font-family:'Fraunces';color:var(--ink);font-size:1.05rem;font-weight:400}
+footer{background:var(--sky);color:var(--muted);text-align:center;padding:2.4rem 1rem;font-size:var(--fs-xs);border-top:1px solid var(--line)}
+footer .fname{font-family:'Fraunces',serif;color:var(--ink);font-size:var(--fs-md);font-weight:400}
 
 @media (max-width:900px){
   .hero{grid-template-columns:1fr}
