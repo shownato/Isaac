@@ -6,7 +6,9 @@ o que foi pedido, rápido e sem quebrar o site.
 ## O que é o projeto
 
 Site de portfólio do **Isaac Roberto**, modelo infantil (4 anos). Página única,
-publicada gratuitamente pelo **GitHub Pages** em https://shownato.github.io/Isaac/.
+publicada gratuitamente pelo **GitHub Pages** em https://isaacroberto.com.br/
+(domínio próprio, registrado no Registro.br; o arquivo `CNAME` na raiz é o que
+faz o GitHub Pages servir o site nesse endereço — não apague).
 
 ## Tecnologia (importante — não invente)
 
@@ -23,6 +25,7 @@ publicada gratuitamente pelo **GitHub Pages** em https://shownato.github.io/Isaa
 - `index.html` — o site inteiro (HTML + CSS inline + JS inline).
 - `img/` — fotos do Isaac (`isaac-1.jpg`, `isaac-2.jpg`, `isaac-3.jpg`).
 - `og-isaac.jpg` — imagem do preview de compartilhamento (WhatsApp/Instagram).
+- `CNAME` — domínio próprio do site. Não apague nem renomeie.
 - `README.md` — instruções de publicação para leigos.
 - `CLAUDE.md` — este guia.
 
@@ -55,7 +58,7 @@ publicada gratuitamente pelo **GitHub Pages** em https://shownato.github.io/Isaa
 - Para testar comportamento (JS, cliques, layout): suba um servidor estático local
   e teste no navegador. Não confie só em ler o código.
 - Para conferir o site publicado:
-  `curl -s -o /dev/null -w "%{http_code}" https://shownato.github.io/Isaac/`
+  `curl -s -o /dev/null -w "%{http_code}" https://isaacroberto.com.br/`
 
 ## Regras rígidas
 
