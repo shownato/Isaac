@@ -36,12 +36,12 @@ Pronto — o site está no ar!
 
 ## Passo 4 — Ativar o preview de compartilhamento (importante)
 
-O `index.html` já vem configurado para `https://shownato.github.io/Isaac/`
+O `index.html` já vem configurado para `https://isaacroberto.com.br/`
 (são as linhas marcadas com o comentário "Preview de compartilhamento").
 
 Se você publicar este site em outro endereço (outro usuário ou nome de
 repositório), abra o `index.html` e troque todas as ocorrências de
-`https://shownato.github.io/Isaac/` nessas linhas pelo endereço real do seu site.
+`https://isaacroberto.com.br/` nessas linhas pelo endereço real do seu site.
 
 Exemplo: se o seu endereço for `https://mariasilva.github.io/isaac-roberto/`, então:
 
