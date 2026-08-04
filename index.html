@@ -236,6 +236,13 @@ section{position:relative}
 footer{background:var(--sky);color:var(--muted);text-align:center;padding:2.4rem 1rem;font-size:var(--fs-xs);border-top:1px solid var(--line)}
 footer .fname{font-family:'Fraunces',serif;color:var(--ink);font-size:var(--fs-md);font-weight:400}
 
+/* Sao 7 fotos no grid de 3 colunas, entao a ultima fica sozinha na terceira
+   linha. Centraliza a orfa para a grade nao parecer quebrada. Abaixo de 900px
+   o grid vira 2 colunas com a primeira foto ocupando a linha inteira — la as
+   7 fotos fecham certinho e esta regra nao deve valer. */
+@media (min-width:901px){
+  .gal-grid figure:last-child:nth-child(3n+1){grid-column:2}
+}
 @media (max-width:900px){
   .hero{grid-template-columns:1fr}
   .hero-right{height:60vh;min-height:360px}.hero-right img{position:relative}
@@ -295,6 +302,7 @@ footer .fname{font-family:'Fraunces',serif;color:var(--ink);font-size:var(--fs-m
       <figure><button type="button" class="gal-btn"><img src="img/isaac-prada.jpg" alt="Isaac Roberto de óculos escuros e camisa jeans, ao ar livre" loading="lazy" decoding="async"></button></figure>
       <figure><button type="button" class="gal-btn"><img src="img/isaac-3.jpg" alt="Isaac Roberto sorrindo e apontando, em camisa floral" loading="lazy" decoding="async"></button></figure>
       <figure><button type="button" class="gal-btn"><img src="img/isaac-skate.jpg" alt="Isaac Roberto de camiseta amarela, apoiado em um skate" loading="lazy" decoding="async"></button></figure>
+      <figure><button type="button" class="gal-btn"><img src="img/isaac-2.jpg" alt="Isaac Roberto com as mãos nos bolsos, em polo preto e shorts branco, em estúdio de fundo claro" loading="lazy" decoding="async"></button></figure>
     </div>
   </div>
 </section>
