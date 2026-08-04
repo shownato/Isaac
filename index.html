@@ -96,8 +96,8 @@ section{position:relative}
   .reveal{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
   /* As barras, o zoom da galeria e os botoes ficavam de fora da regra. */
-  .bar .fill,.gal-grid img,.btn,.ccard,.igcard .avatar{transition:none}
-  .btn:hover,.ccard:hover,.gal-grid figure:hover img,.igcard .avatar:hover{transform:none}
+  .bar .fill,.gal-grid img,.btn,.ccard{transition:none}
+  .btn:hover,.ccard:hover,.gal-grid figure:hover img{transform:none}
 }
 
 /* HERO */
@@ -206,6 +206,13 @@ section{position:relative}
 /* O contorno global de foco e arredondado em 6px, que num circulo aparece
    como um quadrado torto. Aqui ele acompanha a borda. */
 .igcard .avatar:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:50%}
+/* O bloco geral de prefers-reduced-motion la em cima cresce numa linha so, e
+   duas branches mexendo nele ao mesmo tempo brigam por essa linha. A regra
+   deste componente mora aqui, junto do que ela desliga. */
+@media (prefers-reduced-motion:reduce){
+  .igcard .avatar{transition:none}
+  .igcard .avatar:hover{transform:none}
+}
 .igcard .avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--white);display:block}
 .igcard .igname{font-family:'Fraunces',serif;font-weight:400;font-size:var(--fs-md);color:var(--ink)}
 .igstats{display:flex;justify-content:center;gap:1.5rem;margin:1rem 0 1.2rem}
