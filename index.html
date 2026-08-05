@@ -145,6 +145,36 @@ section{position:relative}
 /* O figure tem overflow:hidden, entao um contorno para fora seria cortado. */
 .gal-btn:focus-visible{outline:3px solid var(--blue);outline-offset:-3px;border-radius:0}
 
+/* VIDEOS (Shorts do YouTube, formato 9/16) */
+.videos{padding:0 0 clamp(4.5rem,10vw,7.5rem)}
+.vid-head{margin-bottom:2.6rem;text-align:center}
+.vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.vcard{border-radius:22px;overflow:hidden;aspect-ratio:9/16;background:var(--ink);
+  box-shadow:0 26px 54px -40px rgba(39,67,114,.5)}
+/* O cartao e so uma imagem com um <button> por cima ate alguem clicar. O
+   player do YouTube pesa mais de 1MB e planta cookie em quem abre a pagina,
+   entao ele so entra depois do clique — quem nao assiste nao paga por ele. */
+.vid-btn{position:relative;display:block;width:100%;height:100%;padding:0;border:none;
+  background:none;cursor:pointer;font:inherit;color:inherit}
+.vid-btn img{width:100%;height:100%;object-fit:cover;display:block}
+/* inset+margin:auto centraliza sem transform, entao o scale do hover parte do
+   zero e o prefers-reduced-motion consegue anular so ele. */
+.vid-btn .play{position:absolute;inset:0;margin:auto;width:62px;height:62px;border-radius:50%;
+  background:rgba(255,255,255,.92);display:grid;place-items:center;
+  transition:transform .3s ease,background .3s ease}
+.vid-btn .play svg{width:24px;height:24px;fill:var(--blue);margin-left:3px}
+.vid-btn:hover .play{transform:scale(1.08);background:var(--white)}
+/* O bloco geral de prefers-reduced-motion la em cima cresce numa linha so, e
+   duas branches mexendo nele ao mesmo tempo brigam por essa linha. A regra
+   deste componente mora aqui, junto do que ela desliga. */
+@media (prefers-reduced-motion:reduce){
+  .vid-btn .play{transition:none}
+  .vid-btn:hover .play{transform:none}
+}
+/* O vcard tem overflow:hidden, entao um contorno para fora seria cortado. */
+.vid-btn:focus-visible{outline:3px solid var(--blue);outline-offset:-3px;border-radius:0}
+.vcard iframe{width:100%;height:100%;border:0;display:block}
+
 /* LIGHTBOX (clicar para ampliar) */
 .lightbox{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
   background:rgba(23,40,72,.86);backdrop-filter:blur(4px);padding:clamp(1rem,4vw,3rem);
@@ -255,7 +285,10 @@ footer .fname{font-family:'Fraunces',serif;color:var(--ink);font-size:var(--fs-m
      sozinha: nesse caso ocupa a linha inteira tambem, fechando igual ao topo. */
   .gal-grid figure:last-child:nth-child(even){grid-column:1/-1;aspect-ratio:16/10}
 }
-@media (max-width:560px){.big3{grid-template-columns:1fr;gap:1.6rem}.gal-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.big3{grid-template-columns:1fr;gap:1.6rem}.gal-grid{grid-template-columns:1fr}
+  /* Tres cartoes 9/16 lado a lado ficariam finos demais no celular. Empilha,
+     com largura limitada para o cartao nao virar uma coluna gigante. */
+  .vid-grid{grid-template-columns:1fr;max-width:320px;margin:0 auto}}
 </style>
 </head>
 <body>
@@ -312,6 +345,35 @@ footer .fname{font-family:'Fraunces',serif;color:var(--ink);font-size:var(--fs-m
       <figure><button type="button" class="gal-btn"><img src="img/isaac-3.jpg" alt="Isaac Roberto sorrindo e apontando, em camisa floral" loading="lazy" decoding="async"></button></figure>
       <figure><button type="button" class="gal-btn"><img src="img/isaac-branco.jpg" alt="Isaac Roberto de camiseta branca e bermuda listrada clara, encostado numa parede cinza" loading="lazy" decoding="async"></button></figure>
       <figure><button type="button" class="gal-btn"><img src="img/isaac-jurassic.jpg" alt="Isaac Roberto em look de explorador, com colete bege e cenário de floresta" loading="lazy" decoding="async"></button></figure>
+    </div>
+  </div>
+</section>
+
+<section class="videos" id="videos">
+  <div class="wrap">
+    <div class="vid-head reveal">
+      <span class="eyebrow">Vídeos</span>
+      <h2 class="titlestack" style="margin-top:.5rem"><span class="big">Ele também</span> <span class="cursive">em movimento</span></h2>
+    </div>
+    <div class="vid-grid reveal">
+      <div class="vcard">
+        <button type="button" class="vid-btn" data-yt="9wbQpKg_N_g" data-titulo="Campanha da Bibi" aria-label="Assistir ao vídeo: campanha da Bibi">
+          <img src="img/video-bibi.jpg" alt="Isaac Roberto sentado numa bola de futebol, em quadra azul, na campanha da Bibi" loading="lazy" decoding="async">
+          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+      </div>
+      <div class="vcard">
+        <button type="button" class="vid-btn" data-yt="YvboUdp77Hc" data-titulo="Campanha da Kyly" aria-label="Assistir ao vídeo: campanha da Kyly">
+          <img src="img/video-kyly.jpg" alt="Isaac Roberto de camisa floral azul-clara e bermuda branca, encostado numa parede cinza" loading="lazy" decoding="async">
+          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+      </div>
+      <div class="vcard">
+        <button type="button" class="vid-btn" data-yt="QzUgE54ghu4" data-titulo="Apresentação do Isaac" aria-label="Assistir ao vídeo: apresentação do Isaac">
+          <img src="img/video-apresentacao.jpg" alt="Isaac Roberto deitado na grama, sorrindo e falando com a câmera" loading="lazy" decoding="async">
+          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -458,6 +520,20 @@ lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
 // Prende o Tab dentro do dialogo: o unico foco possivel e o botao fechar.
 lb.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();lbClose.focus();}});
+
+// VIDEOS — o player do YouTube so nasce no clique. Ate ali a pagina nao faz
+// nenhum pedido ao Google, e quem passa direto nao recebe cookie nenhum.
+// O dominio -nocookie e a versao sem rastreamento do embed.
+document.querySelectorAll('.vid-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const frame=document.createElement('iframe');
+    frame.src='https://www.youtube-nocookie.com/embed/'+btn.dataset.yt+'?autoplay=1&rel=0';
+    frame.title=btn.dataset.titulo;
+    frame.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';
+    frame.allowFullscreen=true;
+    btn.replaceWith(frame);
+  });
+});
 </script>
 </body>
 </html>
