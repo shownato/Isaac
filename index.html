@@ -280,10 +280,11 @@ section{position:relative}
 footer{background:var(--sky);color:var(--muted);text-align:center;padding:2.4rem 1rem;font-size:var(--fs-xs);border-top:1px solid var(--line)}
 footer .fname{font-family:'Fraunces',serif;color:var(--ink);font-size:var(--fs-md);font-weight:400}
 
-/* Sao 7 fotos no grid de 3 colunas, entao a ultima fica sozinha na terceira
-   linha. Centraliza a orfa para a grade nao parecer quebrada. Abaixo de 900px
-   o grid vira 2 colunas com a primeira foto ocupando a linha inteira — la as
-   7 fotos fecham certinho e esta regra nao deve valer. */
+/* Quando o total de fotos deixa uma sozinha na ultima linha das 3 colunas,
+   centraliza a orfa para a grade nao parecer quebrada. Hoje sao 15 fotos
+   (multiplo de 3), entao a regra fica de reserva: ela volta a valer sozinha
+   se alguem adicionar ou remover uma foto. Abaixo de 900px o grid vira 2
+   colunas e quem cuida da orfa e a regra do bloco seguinte. */
 @media (min-width:901px){
   .gal-grid figure:last-child:nth-child(3n+1){grid-column:2}
 }
