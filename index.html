@@ -495,7 +495,14 @@ footer .fname{font-family:'Fraunces',serif;color:var(--ink);font-size:var(--fs-m
 </div>
 
 <script>
-const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+// O threshold mede uma fracao do ELEMENTO observado, nao da tela — e por isso
+// ele quebra quando o elemento cresce. Com 15 fotos a grade da galeria passou
+// de 4900px de altura no celular, e 14% dela (690px) nao cabe numa tela de
+// 568px: o observer nunca disparava, a classe .in nunca entrava e a galeria
+// inteira ficava parada em opacity:0. O rootMargin mede em relacao a TELA,
+// entao continua valendo por mais alto que o elemento fique: revela assim que
+// o topo dele sobe 12% da altura da tela.
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
 document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
 const reach=document.querySelector('.reach');
 const bIO=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%');bIO.disconnect();}});},{threshold:.3});
